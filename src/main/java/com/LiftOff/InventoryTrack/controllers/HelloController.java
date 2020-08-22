@@ -13,6 +13,11 @@ public class HelloController {
         return "Hello World";
     }
 
+    @RequestMapping(value="home")
+    public String home(){
+        return "HomePage.html";
+    }
+
     @RequestMapping(value="goodbye")
     @ResponseBody
     public String goodbye(){
