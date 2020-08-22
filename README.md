@@ -1,0 +1,5 @@
+This is a MVP for an app that will allow business owners to keep track of there inventory in one place while having there products listed on multiple eCommerce platforms. 
+Each storefront will ping back to the database that stores the inventory to check for changes, and will update the stock count if there are changes in the inventory. 
+This solves two problems, it allows business owners to automate keeping track of their stock on multiple platforms. 
+And solves the age old problem of a store saying something is in stock online, but when you get to the store it's actually out of stock. 
+I got this idea because I currently manage a website for a local business and the online shopping catalog I created with WooCommerce is supposed to pull stock count from there in store inventory which is set up with square, but it is really buggy and does not work consistently at all.
