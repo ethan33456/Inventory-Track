@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:fragment="head">
     <meta charset="UTF-8"/>
     <title>Inventory Track</title>
 
@@ -7,24 +8,17 @@
     <link rel="stylesheet" th:href="@{/styles.css}">
 
 </head>
-<body>
+<body style="display: inline-block;">
 
-<header>
-    <h1>Inventory Track</h1>
-    <ul class="nav" >
-        <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="/shop">Shop</a></li>
-        <li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li>
-        <li class="nav-item"><a class="nav-link" href="/login">Login/ Out</a></li>
+<header th:fragment="header" style="display: inline-block;">
+    <h1 style="float: right;">Inventory Track</h1>
+    <ul class="nav" style="float: right;">
+        <li class="nav-item"><a class="nav-link" href="/events">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/events/create">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="/events/delete">Admin</a></li>
+        <li class="nav-item"><a class="nav-link" href="/eventCategories">Login/ Out</a></li>
     </ul>
 </header>
-<h2>Storefronts:</h2>
-<div class="row">
-    <div class="column" style="background-color: #ffff11;"><h1><a class="nav-link" href="/home">Amazin</a></h1></div>
-    <div class="column" style="background-color: #ff11ff;"><h1><a class="nav-link" href="/home">E-buy</a></h1></div>
-    <div class="column" style="background-color: #11ffff;"><h1><a class="nav-link" href="/home">We-Commerce</a></h1></div>
-    <div class="column" style="background-color: #11ff11;"><h1><a class="nav-link" href="/home">Ethan's Shop</a></h1></div>
-</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
