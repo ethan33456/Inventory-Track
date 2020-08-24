@@ -1,12 +1,17 @@
 package com.LiftOff.InventoryTrack.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
 
+@Entity
 public class Product {
 
 
-    protected int id;
-    private int nextId = 1;
+    @Id
+    @GeneratedValue
+    private int id;
 
     private String name;
 
@@ -17,12 +22,11 @@ public class Product {
     private int quantity;
 
     public Product(String name, String description, float price, int quantity) {
+        this();
         this.name = name;
         this.description = description;
         this.price = price;
-        this.id = nextId;
         this.quantity = quantity;
-        nextId++;
     }
 
     public Product() {};
@@ -55,9 +59,6 @@ public class Product {
         return id;
     }
 
-    public int getNextId() {
-        return nextId;
-    }
 
     public int getQuantity() {
         return quantity;

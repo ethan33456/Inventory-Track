@@ -1,12 +1,18 @@
 package com.LiftOff.InventoryTrack.models;
 
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.Objects;
 
+@Entity
 public class Storefront {
+
+    @Id
+    @GeneratedValue
     private int id;
-    private int nextId = 1;
 
     private String name;
 
@@ -15,11 +21,10 @@ public class Storefront {
     private ArrayList<Product> products = new ArrayList<>();
 
     public Storefront(String name, String description, ArrayList<Product> products) {
+        this();
         this.name = name;
         this.description = description;
         this.products = products;
-        this.id = nextId;
-        nextId++;
     }
 
     public Storefront() {};
@@ -52,9 +57,6 @@ public class Storefront {
         return id;
     }
 
-    public int getNextId() {
-        return nextId;
-    }
 
     @Override
     public String toString() {return name;}
