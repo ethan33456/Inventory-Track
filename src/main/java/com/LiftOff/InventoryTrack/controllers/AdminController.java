@@ -4,15 +4,15 @@ import com.LiftOff.InventoryTrack.data.ProductRepository;
 import com.LiftOff.InventoryTrack.data.StorefrontRepository;
 import com.LiftOff.InventoryTrack.models.Product;
 import com.LiftOff.InventoryTrack.models.Storefront;
+import com.LiftOff.InventoryTrack.models.dto.StorefrontProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 public class AdminController {
@@ -51,11 +51,29 @@ public class AdminController {
         return "admin/editStorefronts.html";
     }
     @PostMapping(value = "editStorefronts")
-    public String processAddStorefrontForm(@RequestParam String name, @RequestParam String description, @RequestParam ArrayList<Product> products)
+    public String processAddStorefrontForm(@RequestParam String name, @RequestParam String description)
     {
-        storefrontRepository.save(new Storefront(name, description, products));
+        storefrontRepository.save(new Storefront(name, description));
 
         return "admin/editStorefronts.html";
+    }
+
+    //Should respond to /add-product?storefrontId=
+    @GetMapping("add-product")
+    public String displayAddProductToStoreForm(@RequestParam Integer storefrontId, Model model)
+    {
+        Optional<Storefront> result = storefrontRepository.findById(storefrontId);
+        Storefront storefront = result.get();
+        model.addAttribute("Title", "Add product to " + storefront.getName());
+        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("storefront", storefront);
+        model.addAttribute("storefrontProduct",new StorefrontProductDTO());
+        return "admin/addProductToStore.html";
+    }
+    @PostMapping
+    public String processAddProductToStoreForm(@ModelAttribute)
+    {
+
     }
 
 }

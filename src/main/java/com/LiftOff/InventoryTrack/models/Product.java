@@ -3,6 +3,9 @@ package com.LiftOff.InventoryTrack.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,6 +23,9 @@ public class Product {
     private float price;
 
     private int quantity;
+
+    @ManyToMany(mappedBy = "products")
+    private List<Storefront> storefronts = new ArrayList<>();
 
     public Product(String name, String description, float price, int quantity) {
         this();
@@ -59,13 +65,16 @@ public class Product {
         return id;
     }
 
-
     public int getQuantity() {
         return quantity;
     }
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public List<Storefront> getStorefronts() {
+        return storefronts;
     }
 
     @Override

@@ -4,7 +4,9 @@ package com.LiftOff.InventoryTrack.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -18,13 +20,14 @@ public class Storefront {
 
     private String description;
 
-    private ArrayList<Product> products = new ArrayList<>();
+    @ManyToMany
+    private final List<Product> products = new ArrayList<>();
 
-    public Storefront(String name, String description, ArrayList<Product> products) {
+
+    public Storefront(String name, String description) {
         this();
         this.name = name;
         this.description = description;
-        this.products = products;
     }
 
     public Storefront() {};
@@ -45,12 +48,13 @@ public class Storefront {
         this.description = description;
     }
 
-    public ArrayList<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
+    public void addProduct(Product product)
+    {
+        this.products.add(product);
     }
 
     public int getId() {

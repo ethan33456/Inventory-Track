@@ -18,24 +18,22 @@
         <li class="nav-item"><a class="nav-link" href="/login">Login/ Out</a></li>
     </ul>
 </header>
-<h2>Products:</h2>
+<h2>Storefronts:</h2>
 <table class="table table-striped">
     <thead>
     <tr>
         <th>Name</th>
         <th>Description</th>
-        <th>Price</th>
-        <th>Quantity</th>
+        <th>Products</th>
     </tr>
     </thead>
     <tr th:each="storefront : ${storefronts}">
-        <td th:text="${product.name}"></td>
-        <td th:text="${product.description}"></td>
-        <td th:text="${product.price}"></td>
-        <td th:text="${product.quantity}"></td>
+        <td th:text="${storefront.name}"></td>
+        <td th:text="${storefront.description}"></td>
+        <td th:text="${storefront.products}"></td>
     </tr>
 </table>
-<h2>Add Products:</h2>
+<h2>Add Storefronts:</h2>
 <form method="post">
     <div class="form-group">
         <label>Name
@@ -45,16 +43,6 @@
     <div class="form-group">
         <label>Description
             <input type="text" name="description" class="form-control">
-        </label>
-    </div>
-    <div class="form-group">
-        <label>Price
-            <input type="number" name="price" class="form-control">
-        </label>
-    </div>
-    <div class="form-group">
-        <label>Quantity
-            <input type="number" name="quantity" class="form-control">
         </label>
     </div>
     <div class="form-group">
