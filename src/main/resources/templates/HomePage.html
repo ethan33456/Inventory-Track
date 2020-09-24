@@ -27,10 +27,15 @@
         <th>Products</th>
     </tr>
     </thead>
+
     <tr th:each="storefront : ${storefronts}">
         <td th:text="${storefront.name}"></td>
         <td th:text="${storefront.description}"></td>
         <td th:text="${storefront.products}"></td>
+        <a th:href="@{/admin/add-product?storefrontId={id}(id=${item.id})}" href="admin.html"
+           role="button" class="btn btn-default btn-circle">
+            <i class="fa fa-info"></i>
+        </a>
     </tr>
 </table>
 
