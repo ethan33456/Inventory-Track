@@ -18,7 +18,25 @@
         <li class="nav-item"><a class="nav-link" href="/login">Login/ Out</a></li>
     </ul>
 </header>
-
+<h2 th:text="${storefrontProduct.storefront.name}"></h2>
+<h2>Products:</h2>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity</th>
+    </tr>
+    </thead>
+    <tr th:each="product : ${storefrontProduct.storefront.products}">
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.description}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.quantity}"></td>
+    </tr>
+</table>
+<h2 th:text="'Add product to ' + ${storefrontProduct.storefront.name}"></h2>
 <form method="post">
     <div class="form-group">
         <input type="hidden" th:field="${storefrontProduct.storefront}">

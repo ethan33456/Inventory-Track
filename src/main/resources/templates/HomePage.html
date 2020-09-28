@@ -10,16 +10,18 @@
 <body>
 
 <header>
-    <h1>Inventory Track</h1>
-    <ul class="nav" >
+    <h1 style="float: left;">Inventory Track</h1>
+    <ul class="nav nav-tabs" style="float: right;">
         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="/shop">Shop</a></li>
         <li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li>
         <li class="nav-item"><a class="nav-link" href="/login">Login/ Out</a></li>
     </ul>
 </header>
-<h2>Storefronts:</h2>
-<table class="table table-striped">
+
+
+<h2>Storefronts</h2>
+<table class="table">
     <thead>
     <tr>
         <th>Name</th>
@@ -28,18 +30,17 @@
     </tr>
     </thead>
 
-    <tr th:each="storefront : ${storefronts}">
+    <tr th:each="storefront : ${storefronts}" style="cursor: pointer;" th:onclick="'javascript:rowClicked(\'add-product?storefrontId=' + ${storefront.id} + '\');'">
         <td th:text="${storefront.name}"></td>
         <td th:text="${storefront.description}"></td>
         <td th:text="${storefront.products}"></td>
-        <a th:href="@{/admin/add-product?storefrontId={id}(id=${item.id})}" href="admin.html"
-           role="button" class="btn btn-default btn-circle">
-            <i class="fa fa-info"></i>
-        </a>
     </tr>
 </table>
-
-
+<script>
+    function rowClicked(value) {
+        location.href = value;
+    }
+</script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
