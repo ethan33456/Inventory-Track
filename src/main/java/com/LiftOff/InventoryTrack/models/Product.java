@@ -37,6 +37,10 @@ public class Product {
 
     public Product() {};
 
+    public void buyNow()
+    {
+        this.quantity--;
+    }
     public String getName() {
         return name;
     }
@@ -76,6 +80,7 @@ public class Product {
     public List<Storefront> getStorefronts() {
         return storefronts;
     }
+
 
     @Override
     public String toString() {

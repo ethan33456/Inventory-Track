@@ -1,25 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<meta charset="UTF-8"/>
-<title>Inventory Track</title>
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-<link rel="stylesheet" th:href="@{/styles.css}">
-
-</head>
+<head th:replace="fragments :: head"></head>
 <body>
 
-<header>
-    <h1>Inventory Track</h1>
-    <ul class="nav" >
-        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="/shop">Shop</a></li>
-        <li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li>
-        <li class="nav-item"><a class="nav-link" href="/login">Login/ Out</a></li>
-    </ul>
-</header>
+<header th:replace="fragments :: navMenu"></header>
+
 <h2 th:text="${storefrontProduct.storefront.name}"></h2>
 <h2>Products:</h2>
+
 <table class="table table-striped">
     <thead>
     <tr>
@@ -27,6 +15,7 @@
         <th>Description</th>
         <th>Price</th>
         <th>Quantity</th>
+
     </tr>
     </thead>
     <tr th:each="product : ${storefrontProduct.storefront.products}">
@@ -36,6 +25,21 @@
         <td th:text="${product.quantity}"></td>
     </tr>
 </table>
+
+<h2 th:text="'Delete product from ' + ${storefrontProduct.storefront.name}"></h2>
+<form action="delete-product" method="post" >
+    <div class="form-group">
+        <input type="hidden" th:field="${storefrontProduct.storefront}">
+        <select th:field = "${storefrontProduct.product}">
+            <option th:each = "product : ${products}"
+                    th:value = "${product.id}"
+                    th:text = "${product.name}">
+
+            </option>
+        </select>
+    </div>
+    <input type="submit" class="btn btn-danger" value="delete">
+</form>
 <h2 th:text="'Add product to ' + ${storefrontProduct.storefront.name}"></h2>
 <form method="post">
     <div class="form-group">

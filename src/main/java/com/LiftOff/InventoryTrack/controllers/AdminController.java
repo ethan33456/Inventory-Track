@@ -85,4 +85,30 @@ public class AdminController {
         }
     return "redirect:add-product";
     }
+    @PostMapping("delete-product")
+    public String processDeleteProductFromStoreForm(@ModelAttribute @Validated StorefrontProductDTO storefrontProduct, Errors errors, Model model) {
+
+        if (!errors.hasErrors()) {
+            Storefront storefront = storefrontProduct.getStorefront();
+            Product product = storefrontProduct.getProduct();
+            if (!storefront.getProducts().contains(product)) {
+                storefront.addProduct(product);
+                storefrontRepository.save(storefront);
+            }
+            return "redirect:add-product?storefrontId=" + storefront.getId();
+        }
+        return "redirect:add-product";
+    }
+    @GetMapping("shop")
+    public String displayShop(@RequestParam Integer storefrontId, Model model) {
+        Optional<Storefront> result = storefrontRepository.findById(storefrontId);
+        Storefront storefront = result.get();
+        model.addAttribute("Title", "Shop " + storefront.getName());
+        model.addAttribute("products", storefront.getProducts());
+        StorefrontProductDTO storefrontProduct = new StorefrontProductDTO();
+        storefrontProduct.setStorefront(storefront);
+        model.addAttribute("storefront", storefront);
+        model.addAttribute("storefrontProduct", storefrontProduct);
+        return "shop.html";
+    }
 }

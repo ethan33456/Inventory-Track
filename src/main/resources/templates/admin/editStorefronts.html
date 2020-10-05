@@ -1,23 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<meta charset="UTF-8"/>
-<title>Inventory Track</title>
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-<link rel="stylesheet" th:href="@{/styles.css}">
-
-</head>
+<head th:replace="fragments :: head"></head>
 <body>
 
-<header>
-    <h1>Inventory Track</h1>
-    <ul class="nav" >
-        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="/shop">Shop</a></li>
-        <li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li>
-        <li class="nav-item"><a class="nav-link" href="/login">Login/ Out</a></li>
-    </ul>
-</header>
+<header th:replace="fragments :: navMenu"></header>
+
 <h2>Storefronts:</h2>
 <p>Click Storefront to edit</p>
 <table class="table table-striped">

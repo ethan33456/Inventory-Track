@@ -30,6 +30,11 @@ public class Storefront {
         this.description = description;
     }
 
+    public void deleteProduct(Integer Id)
+    {
+        this.products.remove(Id);
+    }
+
     public Storefront() {};
 
     public String getName() {
