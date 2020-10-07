@@ -15,6 +15,7 @@
         <th>Description</th>
         <th>Price</th>
         <th>Quantity</th>
+        <th>Id</th>
 
     </tr>
     </thead>
@@ -23,6 +24,7 @@
         <td th:text="${product.description}"></td>
         <td th:text="${product.price}"></td>
         <td th:text="${product.quantity}"></td>
+        <td th:text="${product.id}"></td>
     </tr>
 </table>
 
@@ -31,7 +33,7 @@
     <div class="form-group">
         <input type="hidden" th:field="${storefrontProduct.storefront}">
         <select th:field = "${storefrontProduct.product}">
-            <option th:each = "product : ${products}"
+            <option th:each = "product : ${storefrontProduct.storefront.products}"
                     th:value = "${product.id}"
                     th:text = "${product.name}">
 

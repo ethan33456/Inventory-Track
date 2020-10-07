@@ -12,21 +12,18 @@
 <div class="contain">
 
     <div class="grid">
-        <div class="cell" style="cursor: pointer; display: block;" th:each="product : ${products}">
+        <div class="cell" style="cursor: pointer; display: block;" th:each="product : ${products}" th:onclick="'javascript:rowClicked(\'buy?productId=' + ${product.id} + '\');'">
             <h2 th:text="${product.name}"></h2>
             <p th:text="'Quantity: ' + ${product.quantity}" style="font-size: 14px;"></p>
-            <button type="button" value="Buy Now" th:onclick="${product.buyNow()}">Buy Now</button>
         </div>
 
     </div>
 </div>
 
 <script>
-    function buyNow(Integer id)
-    {
-    product = ProductRepository.findById(id);
-    product.quantity--;
-    ProductRepository.save(product)
+
+   function rowClicked(value) {
+        location.href = value;
     }
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -35,6 +36,16 @@ public class AdminController {
         model.addAttribute("title", "All Products");
         model.addAttribute("products", productRepository.findAll());
         return "admin/editProducts.html";
+    }
+    @RequestMapping(value = "buy")
+    public String buyNow(@RequestParam Integer productId)
+    {
+        Optional<Product> result = productRepository.findById(productId);
+        Product product = result.get();
+
+        product.buyNow();
+        productRepository.save(product);
+        return "redirect:";
     }
 
     @PostMapping(value = "editProducts")
@@ -64,6 +75,7 @@ public class AdminController {
         Optional<Storefront> result = storefrontRepository.findById(storefrontId);
         Storefront storefront = result.get();
         model.addAttribute("Title", "Add product to " + storefront.getName());
+        model.addAttribute("storefront", storefront);
         model.addAttribute("products", productRepository.findAll());
         StorefrontProductDTO storefrontProduct = new StorefrontProductDTO();
         storefrontProduct.setStorefront(storefront);
@@ -79,6 +91,8 @@ public class AdminController {
             Product product = storefrontProduct.getProduct();
             if (!storefront.getProducts().contains(product)) {
                 storefront.addProduct(product);
+                System.out.print("fefefef");
+
                 storefrontRepository.save(storefront);
             }
             return "redirect:add-product?storefrontId=" + storefront.getId();
@@ -86,18 +100,15 @@ public class AdminController {
     return "redirect:add-product";
     }
     @PostMapping("delete-product")
-    public String processDeleteProductFromStoreForm(@ModelAttribute @Validated StorefrontProductDTO storefrontProduct, Errors errors, Model model) {
+    public String processDeleteProductFromStoreForm(@ModelAttribute Storefront storefront, @ModelAttribute Integer productId, Errors errors, Model model) {
 
-        if (!errors.hasErrors()) {
-            Storefront storefront = storefrontProduct.getStorefront();
-            Product product = storefrontProduct.getProduct();
-            if (!storefront.getProducts().contains(product)) {
-                storefront.addProduct(product);
-                storefrontRepository.save(storefront);
-            }
-            return "redirect:add-product?storefrontId=" + storefront.getId();
-        }
-        return "redirect:add-product";
+        System.out.print("product");
+        System.out.print("HHHHHHHH");
+        //Product product = productRepository.findById(productId);
+        //storefront.deleteProduct(product);
+        storefrontRepository.save(storefront);
+        return "redirect:add-product?storefrontId=" + storefront.getId();
+
     }
     @GetMapping("shop")
     public String displayShop(@RequestParam Integer storefrontId, Model model) {
@@ -109,6 +120,15 @@ public class AdminController {
         storefrontProduct.setStorefront(storefront);
         model.addAttribute("storefront", storefront);
         model.addAttribute("storefrontProduct", storefrontProduct);
+        return "shop.html";
+    }
+    @PostMapping("shop")
+    public String buyProduct(@RequestParam Integer productId)
+    {
+       Optional<Product> result = productRepository.findById(productId);
+       Product product = result.get();
+       product.buyNow();
+       productRepository.save(product);
         return "shop.html";
     }
 }

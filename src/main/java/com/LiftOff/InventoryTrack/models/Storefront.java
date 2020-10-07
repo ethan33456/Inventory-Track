@@ -30,10 +30,6 @@ public class Storefront {
         this.description = description;
     }
 
-    public void deleteProduct(Integer Id)
-    {
-        this.products.remove(Id);
-    }
 
     public Storefront() {};
 
@@ -61,6 +57,8 @@ public class Storefront {
     {
         this.products.add(product);
     }
+
+    public void deleteProduct(Product product) {this.products.remove(product); }
 
     public int getId() {
         return id;
