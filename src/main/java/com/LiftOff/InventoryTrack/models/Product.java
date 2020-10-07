@@ -39,7 +39,9 @@ public class Product {
 
     public void buyNow()
     {
-        this.quantity--;
+        if (quantity > 0) {
+            this.quantity--;
+        }
     }
     public String getName() {
         return name;
