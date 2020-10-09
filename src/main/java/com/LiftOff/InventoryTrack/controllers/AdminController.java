@@ -99,6 +99,17 @@ public class AdminController {
         }
     return "redirect:add-product";
     }
+    @RequestMapping("deleteProduct")
+    public String deleteProduct(@RequestParam Integer id)
+    {
+
+         Optional<Product> result = productRepository.findById(id);
+         Product product = result.get();
+         productRepository.delete(product);
+        StorefrontProductDTO storefrontProduct = new StorefrontProductDTO();
+        //storefrontProduct.
+         return "redirect:";
+    }
     @PostMapping("delete-product")
     public String processDeleteProductFromStoreForm(@ModelAttribute Storefront storefront, @ModelAttribute Integer productId, Errors errors, Model model) {
 

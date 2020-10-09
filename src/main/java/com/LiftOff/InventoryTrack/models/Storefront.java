@@ -1,10 +1,7 @@
 package com.LiftOff.InventoryTrack.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -58,7 +55,8 @@ public class Storefront {
         this.products.add(product);
     }
 
-    public void deleteProduct(Product product) {this.products.remove(product); }
+    public void deleteProduct(Product product) {this.products.remove(product);
+    product.getStorefronts().remove(this);}
 
     public int getId() {
         return id;

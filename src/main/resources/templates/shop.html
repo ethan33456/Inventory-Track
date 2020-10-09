@@ -11,10 +11,11 @@
 
 <div class="contain">
 
-    <div class="grid">
-        <div class="cell" style="cursor: pointer; display: block;" th:each="product : ${products}" th:onclick="'javascript:rowClicked(\'buy?productId=' + ${product.id} + '\');'">
+    <div class="grid" style="padding-bottom: 15px;">
+        <div class="cell" style="cursor: pointer; display: block;" th:each="product : ${products}">
             <h2 th:text="${product.name}"></h2>
             <p th:text="'Quantity: ' + ${product.quantity}" style="font-size: 14px;"></p>
+            <button type="button" class="btn btn-success" th:onclick="'javascript:rowClicked(\'buy?productId=' + ${product.id} + '\');'">Buy Now</button>
         </div>
 
     </div>

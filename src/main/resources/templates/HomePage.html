@@ -11,8 +11,8 @@
 
 <div class="contain">
 
-    <div class="grid">
-        <div class="cell" style="cursor: pointer;" th:each="storefront : ${storefronts}" th:onclick="'javascript:rowClicked(\'shop?storefrontId=' + ${storefront.id} + '\');'">
+    <div class="grid" style="margin-top: -85px;">
+        <div class="cell" style="cursor: pointer; margin-top: 85px;" th:each="storefront : ${storefronts}" th:onclick="'javascript:rowClicked(\'shop?storefrontId=' + ${storefront.id} + '\');'">
             <h2 th:text="${storefront.name}"></h2>
         </div>
 
