@@ -20,7 +20,7 @@
         <td th:text="${product.description}"></td>
         <td th:text="${product.price}"></td>
         <td th:text="${product.quantity}"></td>
-        <td><input type="button" class="btn btn-success" th:onclick="'javascript:rowClicked(\'deleteProduct?id=' + ${product.id} + '\');'"></td>
+        <td><input type="button" class="btn btn-danger" th:value="Delete" th:onclick="'javascript:rowClicked(\'deleteProduct?id=' + ${product.id} + '\');'"></td>
     </tr>
 </table>
 <div style="display: inline-block;">

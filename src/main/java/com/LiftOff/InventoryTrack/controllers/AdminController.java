@@ -102,12 +102,13 @@ public class AdminController {
     @RequestMapping("deleteProduct")
     public String deleteProduct(@RequestParam Integer id)
     {
+        StorefrontProductDTO storefrontProduct = new StorefrontProductDTO();
+        storefrontProduct.removeProduct(id);
 
          Optional<Product> result = productRepository.findById(id);
          Product product = result.get();
          productRepository.delete(product);
-        StorefrontProductDTO storefrontProduct = new StorefrontProductDTO();
-        //storefrontProduct.
+
          return "redirect:";
     }
     @PostMapping("delete-product")
