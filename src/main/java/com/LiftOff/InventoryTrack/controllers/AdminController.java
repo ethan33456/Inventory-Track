@@ -69,6 +69,16 @@ public class AdminController {
         return "admin/editStorefronts.html";
     }
 
+    @PostMapping(value = "updateProduct")
+    public String processUpdateProduct(@RequestParam String name, @RequestParam String description, @RequestParam float price, @RequestParam int quantity, @RequestParam int id)
+    {
+
+        productRepository.updateProductById(name, description, price, quantity, id);
+        return "redirect:";
+    }
+
+
+
     //Should respond to /add-product?storefrontId=
     @GetMapping("add-product")
     public String displayAddProductToStoreForm(@RequestParam Integer storefrontId, Model model) {
@@ -119,6 +129,15 @@ public class AdminController {
         productRepository.save(product);
         return "redirect:add-product?storefrontId=" + storefront.getId();
 
+    }
+    @GetMapping(value = "updateProduct")
+    public String displayUpdateProduct(@RequestParam Integer id, Model model)
+    {
+        Optional<Product> result = productRepository.findById(id);
+        Product product = result.get();
+        model.addAttribute("Title", "Edit " + product.getName());
+        model.addAttribute("product", product);
+        return "updateProduct.html";
     }
     @GetMapping("shop")
     public String displayShop(@RequestParam Integer storefrontId, Model model) {
