@@ -100,14 +100,15 @@ public class AdminController {
     return "redirect:add-product";
     }
     @RequestMapping("deleteProduct")
-    public String deleteProduct(@RequestParam Integer id)
+    public String deleteProduct(@RequestParam Integer id, Model model)
     {
-        StorefrontProductDTO storefrontProduct = new StorefrontProductDTO();
-        storefrontProduct.removeProduct(id);
-
+        //Isolate product passed in
          Optional<Product> result = productRepository.findById(id);
          Product product = result.get();
-         productRepository.delete(product);
+         //Delete all storefronts from product
+        product.deleteAllStorefronts();
+
+        productRepository.delete(product);
 
          return "redirect:";
     }

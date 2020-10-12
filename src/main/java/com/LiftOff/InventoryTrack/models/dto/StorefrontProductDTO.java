@@ -8,8 +8,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public class StorefrontProductDTO {
 
-    private final CrudRepository crudRepository;
-
     @NotNull
     private Storefront storefront;
 
@@ -19,7 +17,6 @@ public class StorefrontProductDTO {
     public StorefrontProductDTO() {}
 
     public Storefront getStorefront() {
-        this.crudRepository = crudRepository;
         return storefront;
     }
 
@@ -34,11 +31,7 @@ public class StorefrontProductDTO {
     public void setProduct(Product product) {
         this.product = product;
     }
-    public void delete(Integer id)
-    {
-        crudRepository.findById(id);
-        this.delete();
-    }
+
 
 
 }

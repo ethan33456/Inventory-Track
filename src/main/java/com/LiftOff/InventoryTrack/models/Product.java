@@ -1,9 +1,7 @@
 package com.LiftOff.InventoryTrack.models;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Product {
@@ -22,7 +20,9 @@ public class Product {
     private int quantity;
 
     @ManyToMany(mappedBy = "products")
-    private List<Storefront> storefronts = new ArrayList<>();
+    private Set<Storefront> storefronts = new HashSet<>();
+
+    public Product() {};
 
     public Product(String name, String description, float price, int quantity) {
         this();
@@ -32,7 +32,7 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public Product() {};
+
 
     public void buyNow()
     {
@@ -76,8 +76,17 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public List<Storefront> getStorefronts() {
+    public Set<Storefront> getStorefronts() {
         return storefronts;
+    }
+
+    public void deleteAllStorefronts()
+    {
+        for (Storefront storefront : this.storefronts)
+        {
+            storefront.deleteProduct(this);
+        }
+        this.storefronts.removeAll(this.storefronts);
     }
 
     public void deleteStorefront(Storefront storefront) {this.storefronts.remove(storefront);
