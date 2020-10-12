@@ -113,13 +113,10 @@ public class AdminController {
          return "redirect:";
     }
     @PostMapping("delete-product")
-    public String processDeleteProductFromStoreForm(@ModelAttribute Storefront storefront, @ModelAttribute Integer productId, Errors errors, Model model) {
+    public String processDeleteProductFromStoreForm(@ModelAttribute Storefront storefront, @ModelAttribute Product product, Model model) {
 
-        System.out.print("product");
-        System.out.print("HHHHHHHH");
-        //Product product = productRepository.findById(productId);
-        //storefront.deleteProduct(product);
-        storefrontRepository.save(storefront);
+        product.deleteStorefront(storefront);
+        productRepository.save(product);
         return "redirect:add-product?storefrontId=" + storefront.getId();
 
     }
