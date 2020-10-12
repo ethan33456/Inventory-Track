@@ -137,7 +137,7 @@ public class AdminController {
         Product product = result.get();
         model.addAttribute("Title", "Edit " + product.getName());
         model.addAttribute("product", product);
-        return "updateProduct.html";
+        return "admin/updateProduct.html";
     }
     @GetMapping("shop")
     public String displayShop(@RequestParam Integer storefrontId, Model model) {
