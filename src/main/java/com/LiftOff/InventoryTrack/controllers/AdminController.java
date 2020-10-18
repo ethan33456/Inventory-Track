@@ -75,7 +75,7 @@ public class AdminController {
     {
         System.out.println(name +" ,"+ description +" ,"+ price +" ,"+ quantity +" ,"+ id);
         productRepository.updateProductById(name, description, price, quantity, id);
-        return "redirect:../";
+        return "redirect:";
     }
 
 
@@ -116,17 +116,25 @@ public class AdminController {
         //Isolate product passed in
          Optional<Product> result = productRepository.findById(id);
          Product product = result.get();
+         int size = product.getStorefronts().size();
          //Delete all storefronts from product
+//        Iterator<Storefront> iterator = product.getStorefronts().iterator();
+//        int size = product.getStorefronts().size();
+//        while (iterator.hasNext())
+//        {
+//            Storefront s;
+//            s = iterator.next();
+//            s.deleteProduct(product);
+//
+//        }
+//        product.getStorefronts().removeAll(product.getStorefronts());
         Iterator<Storefront> iterator = product.getStorefronts().iterator();
-        int size = product.getStorefronts().size();
-        while (iterator.hasNext())
-        {
-            Storefront s;
-            s = iterator.next();
-            s.deleteProduct(product);
-
+        for (int i = 0; i < size; i++) {
+            while (iterator.hasNext()) {
+                Storefront storefront = iterator.next();
+                product.deleteStorefront(storefront);
+            }
         }
-        product.getStorefronts().removeAll(product.getStorefronts());
         productRepository.delete(product);
 
          return "redirect:";

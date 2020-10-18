@@ -84,13 +84,14 @@ public class Product {
     {
         Iterator<Storefront> iterator = this.storefronts.iterator();
         int size = this.storefronts.size();
-        while (iterator.hasNext())
-        {
-                Storefront s;
-            s = iterator.next();
-            s.deleteProduct(this);
-
-        }
+        iterator.forEachRemaining(storefront -> storefront.deleteProduct(this));
+//        for (int i = 0; i < size; i+)
+//        {
+//                Storefront s;
+//            s = iterator.;
+//            s.deleteProduct(this);
+//
+//        }
         this.storefronts.removeAll(this.storefronts);
     }
 

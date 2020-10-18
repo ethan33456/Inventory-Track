@@ -4,6 +4,7 @@ import com.LiftOff.InventoryTrack.models.Product;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
@@ -12,6 +13,6 @@ import javax.transaction.Transactional;
 public interface ProductRepository extends CrudRepository<Product, Integer> {
     @Modifying
     @Transactional
-    @Query("update Product p set p.name = ?1, p.description = ?2, p.price = ?3, p.quantity= ?4 where p.id = ?5")
-    void updateProductById(String name, String description, float price, int quantity, Integer id);
+    @Query("UPDATE Product p SET p.name = :name, p.description = :description, p.price = :price, p.quantity= :quantity WHERE p.id = :id")
+    void updateProductById(@Param("name") String name,@Param("description") String description,@Param("price") float price,@Param("quantity") int quantity,@Param("id") Integer id);
 }
