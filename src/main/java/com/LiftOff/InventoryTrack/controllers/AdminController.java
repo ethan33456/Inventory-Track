@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Optional;
 
 @Controller
@@ -50,7 +51,7 @@ public class AdminController {
 
     @PostMapping(value = "editProducts")
     public String processAddProductForm(@RequestParam String name, @RequestParam String description, @RequestParam float price, @RequestParam int quantity) {
-        productRepository.save(new Product(name, description, price, quantity));
+        productRepository.save(new Product(name, description,price, quantity));
 
         return "redirect:editProducts";
     }
@@ -70,11 +71,11 @@ public class AdminController {
     }
 
     @PostMapping(value = "updateProduct")
-    public String processUpdateProduct(@RequestParam String name, @RequestParam String description, @RequestParam float price, @RequestParam int quantity, @RequestParam int id)
+    public String processUpdateProduct(@RequestParam String name, @RequestParam String description, @RequestParam float price, @RequestParam int quantity, @RequestParam Integer id)
     {
-
+        System.out.println(name +" ,"+ description +" ,"+ price +" ,"+ quantity +" ,"+ id);
         productRepository.updateProductById(name, description, price, quantity, id);
-        return "redirect:";
+        return "redirect:../";
     }
 
 
@@ -116,8 +117,16 @@ public class AdminController {
          Optional<Product> result = productRepository.findById(id);
          Product product = result.get();
          //Delete all storefronts from product
-        product.deleteAllStorefronts();
+        Iterator<Storefront> iterator = product.getStorefronts().iterator();
+        int size = product.getStorefronts().size();
+        while (iterator.hasNext())
+        {
+            Storefront s;
+            s = iterator.next();
+            s.deleteProduct(product);
 
+        }
+        product.getStorefronts().removeAll(product.getStorefronts());
         productRepository.delete(product);
 
          return "redirect:";

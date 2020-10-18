@@ -9,7 +9,7 @@
 
 <h2 th:text="${Title}"></h2>
 
-<form method="post">
+<form method="post" th:action="updateProduct">
     <div class="form-group">
         <label>Name
             <input type="text" name="name" th:value="${product.name}" class="form-control">

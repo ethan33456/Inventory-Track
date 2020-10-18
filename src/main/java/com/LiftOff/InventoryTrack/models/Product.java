@@ -82,9 +82,14 @@ public class Product {
 
     public void deleteAllStorefronts()
     {
-        for (Storefront storefront : this.storefronts)
+        Iterator<Storefront> iterator = this.storefronts.iterator();
+        int size = this.storefronts.size();
+        while (iterator.hasNext())
         {
-            storefront.deleteProduct(this);
+                Storefront s;
+            s = iterator.next();
+            s.deleteProduct(this);
+
         }
         this.storefronts.removeAll(this.storefronts);
     }
