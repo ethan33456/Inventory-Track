@@ -128,13 +128,18 @@ public class AdminController {
 //
 //        }
 //        product.getStorefronts().removeAll(product.getStorefronts());
-        Iterator<Storefront> iterator = product.getStorefronts().iterator();
-        for (int i = 0; i < size; i++) {
-            while (iterator.hasNext()) {
-                Storefront storefront = iterator.next();
-                product.deleteStorefront(storefront);
-            }
+        //Iterator<Storefront> iterator = product.getStorefronts().iterator();
+        //for (int i = 0; i < size; i++) {
+            //while (iterator.hasNext()) {
+               // Storefront storefront = iterator.next();
+                //storefront.deleteProduct(product);
+             //   product.deleteStorefront(storefront);
+           // }
+        for ( Storefront storefront : new ArrayList<Storefront>( product.getStorefronts() )) {
+            product.deleteStorefront(storefront);
+
         }
+        //}
         productRepository.delete(product);
 
          return "redirect:";
