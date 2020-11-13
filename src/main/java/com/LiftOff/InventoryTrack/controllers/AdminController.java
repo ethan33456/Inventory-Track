@@ -75,7 +75,7 @@ public class AdminController {
     {
         System.out.println(name +" ,"+ description +" ,"+ price +" ,"+ quantity +" ,"+ id);
         productRepository.updateProductById(name, description, price, quantity, id);
-        return "redirect:";
+        return "redirect:editProducts";
     }
 
 
@@ -129,7 +129,7 @@ public class AdminController {
 //        }
 //        product.getStorefronts().removeAll(product.getStorefronts());
         //Iterator<Storefront> iterator = product.getStorefronts().iterator();
-        //for (int i = 0; i < size; i++) {
+
             //while (iterator.hasNext()) {
                // Storefront storefront = iterator.next();
                 //storefront.deleteProduct(product);
@@ -142,7 +142,7 @@ public class AdminController {
         //}
         productRepository.delete(product);
 
-         return "redirect:";
+         return "redirect:editProducts";
     }
     @PostMapping("delete-product")
     public String processDeleteProductFromStoreForm(@ModelAttribute Storefront storefront, @ModelAttribute Product product, Model model) {
